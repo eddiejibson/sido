@@ -1,0 +1,16 @@
+{
+    "name": "eddiejibson/sido",
+    "description": "Simplistic PHP unit testing library",
+    "type": "library",
+    "license": "MIT",
+    "authors": [{
+        "name": "Edward Jibson",
+        "email": "jibson@tuta.io"
+    }],
+    "autoload": {
+        "psr-4": {
+            "eddiejibson\\sido\\": "src/"
+        }
+    },
+    "require": {}
+}
