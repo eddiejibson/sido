@@ -1,4 +1,5 @@
 <?php
+namespace eddiejibson\sido;
 
 class Sido
 {
@@ -44,14 +45,13 @@ class Sido
     {
         $res = false;
         $arr = [
-            "when" => $this->getTimestamp(),
             "desc" => $desc,
             "error" => false
         ];
         if (!isset($this->caseCount[$this->case])) {
-            $this->caseCount[$this->case] = 1;
+            $this->caseCount[$this->case] = ["count" => 1, "timestamp" => $this->getTimestamp()];
         } else {
-            $this->caseCount[$this->case]++;
+            $this->caseCount[$this->case]["count"]++;
         }
         if (isset($statement) && (bool)$statement == true) {
             $arr["duration"] = (microtime(true) - $this->sinceLast) / 1000;
@@ -123,8 +123,28 @@ class Sido
             $xml = new SimpleXMLElement("<testsuites time='$time' tests='$tests' failures='$failures' name='Sido Tests'/>");
         }
         if (count($this->tests) > 0) {
-            foreach ($this->tests as $key => $value) {
-                # code...
+            foreach ($this->tests as $testsuite => $val) {
+                $test = $xml->addChild("testsuite");
+                $test->addAttribute("name", $testsuite);
+                $test->addAttribute("tests", count($val));
+                $test->addAttribute("file", realpath(__FILE__));
+                $test->addAttribute("timestamp", $this->caseCount[$testsuite]["timestamp"]);
+                // var_dump($val);
+                $failures = 0;
+                foreach ($val as $testcase => $value) {
+
+                    $case = $test->addChild("testcase");
+                    $case->addAttribute("name", "$testsuite Should " . $value["desc"]);
+                    $case->addAttribute("classname", "Should " . $value["desc"]);
+                    $case->addAttribute("time", number_format($value["duration"], 8));
+                    if ($value["error"] && is_string($value["error"])) {
+                        $failures++;
+                        $failChild = $case->addChild("failure", $value["error"]);
+                        $failChild->addAttribute("message", $value["error"]);
+                        $failChild->addAttribute("type", "AssertionError");
+                    }
+                }
+                $test->addAttribute("failures", $failures);
             }
         }
 
@@ -137,14 +157,3 @@ class Sido
         }
     }
 }
-
-
-
-$sido->setCase("test");
-
-$sido->should((1 == 1), "1 equals 1");
-$sido->should((2 == 1), "2 equals 1");
-
-$sido->setCase("Other test case");
-
-$sido->should((5 == 5), "5 equals 5");
