@@ -2,8 +2,17 @@
 
 class Sido
 {
-    public function __construct()
+    public function __construct(array $options = [])
     {
+        $this->discord = false;
+        if (isset($options) && is_array($options)) {
+            if (isset($options["discord"]) && is_array($options["discord"])) {
+                $this->discord = [
+                    "webhook" => $options["discord"]["webhook"] ?? false,
+                    "username" => $options["discord"]["username"] ?? false
+                ];
+            }
+        }
         echo "Starting tests...\n";
         $this->startingTime = microtime(true);
         $this->totalTime = 0;
@@ -60,10 +69,10 @@ class Sido
         $this->sinceLast = microtime(true);
     }
 
-    private function submitReq(array $arr)
+    private function submitReq(string $url, array $arr)
     {
         $json = json_encode($arr);
-        $ch = curl_init("https://discordapp.com/api/webhooks/580504701435510816/DGPHGxfxBBmAqYw4oBaINcP5Oco3s2atelt5XctMg6KFrFmGG_4bN5F9-CxIjP1a8dhc");
+        $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -99,8 +108,9 @@ class Sido
             echo "\033[32m ✓ Tests passed!\033[0m\n";
         }
         $this->concluded = true;
-        $this->submitReq(["username" => "Sido Test Runner", "embeds" => [["color" => $color, "title" => $title, "footer" => ["text" => "Tests ran by Sido."], "description" => "\n\nTests completed in a total of " . (string)(number_format($this->totalTime, 5)) . " ms.\n\nThere were $totalTests total tests. Of them, there were:\n\n🚫 **Failed Tests**: $failedCount\n\n✅ **Passed Tests**: $this->success\n"]]]);
-        var_dump($this->tests);
+        if (isset($this->discord) && isset($this->discord["webhook"])) {
+            $this->submitReq($this->discord["webhook"], ["username" => ($this->discord["username"] ?? "Sido Test Runner"), "embeds" => [["color" => $color, "title" => $title, "footer" => ["text" => "Tests ran by Sido."], "description" => "\n\nTests completed in a total of " . (string)(number_format($this->totalTime, 5)) . " ms.\n\nThere were $totalTests total tests. Of them, there were:\n\n🚫 **Failed Tests**: $failedCount\n\n✅ **Passed Tests**: $this->success\n"]]]);
+        }
     }
 
     private function generateReport($xml = false)
@@ -112,6 +122,12 @@ class Sido
             $failures = (string)$failedCount;
             $xml = new SimpleXMLElement("<testsuites time='$time' tests='$tests' failures='$failures' name='Sido Tests'/>");
         }
+        if (count($this->tests) > 0) {
+            foreach ($this->tests as $key => $value) {
+                # code...
+            }
+        }
+
         $xml->asXML("report.xml");
     }
     public function __destruct()
@@ -122,7 +138,7 @@ class Sido
     }
 }
 
-$sido = new Sido();
+
 
 $sido->setCase("test");
 
