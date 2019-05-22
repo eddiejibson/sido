@@ -16,4 +16,5 @@ composer require eddiejibson/sido:dev-master
 * Provides test report generation
 * 0 dependencies
 * Few assertions (easy to get used to) which still provides everything you need
+* Provides a [Discord](https://discordapp.com) notification utility via a webhook (notify you and your team easily on completion of a test)
 
