@@ -1,4 +1,10 @@
 # sido
-A very simple PHP unit testing library because I'm not a fan of PHPUnit.
+A very simple PHP unit testing library I created as I'm not a fan of PHPUnit and it's many dependencies.
 
-Don't use this, in very early stages of development.
+## Installation
+
+```bash
+composer require eddiejibson/sido:dev-master
+```
+
+
