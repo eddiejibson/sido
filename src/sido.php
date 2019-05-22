@@ -47,7 +47,7 @@ class Sido
         return $dt->format(DateTime::ATOM);
     }
 
-    public function setCase(string $label = "default")
+    public function setTest(string $label = "default")
     {
         echo "\n" . $label . " :\n\n";
         $this->case = $label;
@@ -58,7 +58,6 @@ class Sido
 
     public function should($statement, string $desc = "evaluate to true", bool $shouldBeFalse = false)
     {
-        $res = false;
         $arr = [
             "desc" => $desc,
             "error" => false
@@ -74,14 +73,12 @@ class Sido
         }
         if ($bool) {
             $arr["duration"] = (microtime(true) - $this->sinceLast) / 1000;
-            $res = true;
             echo str_pad("\033[32m ✓ " . $desc . ". Success. Statement evaluated to be true. \033[0m(" . (string)(microtime(true) - $this->sinceLast) . " ms)\n", 30, " ", STR_PAD_LEFT);
             $this->success++;
         } else {
             $arr["duration"] = (microtime(true) - $this->sinceLast) / 1000;
             echo str_pad("\033[31m ❌ " . $desc . ". Failed. Statement evaluated to be false. \033[0m(" . (string)(microtime(true) - $this->sinceLast) . " ms)\n", 30, " ", STR_PAD_LEFT);
             $arr["error"] = "Should " . $desc . " Failed. Statement evaluated to be false";
-            $res = false;
             array_push($this->failed, ["case" => $this->case]);
         }
         array_push($this->tests[$this->case], $arr);
