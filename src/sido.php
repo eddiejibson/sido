@@ -130,6 +130,11 @@ class Sido
         if (isset($this->options["discord"]) && isset($this->options["discord"]["webhook"])) {
             $this->submitReq($this->options["discord"]["webhook"], ["username" => ($this->options["discord"]["username"] ?? "Sido Test Runner"), "embeds" => [["color" => $color, "title" => $title, "footer" => ["text" => "Tests ran by Sido."], "description" => "\n\nTests completed in a total of " . (string)(number_format($this->totalTime, 5)) . " ms.\n\nThere were $totalTests total tests. Of them, there were:\n\n🚫 **Failed Tests**: $failedCount\n\n✅ **Passed Tests**: $this->success\n"]]]);
         }
+        if ($failedCount >= 1) {
+            exit(1);
+        } else {
+            exit(0);
+        }
     }
 
     private function generateReport($xml = false)
