@@ -43,7 +43,7 @@ class Sido
 
     private function getTimestamp()
     {
-        $dt = new DateTime();
+        $dt = new \DateTime();
         return $dt->format(DateTime::ATOM);
     }
 
