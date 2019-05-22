@@ -1,5 +1,7 @@
 # sido
 
+*sido (시도)* meaning : Try/attempt
+
 A very simple PHP unit testing library I created as I'm not a fan of PHPUnit and it's many dependencies.
 
 ## Installation
