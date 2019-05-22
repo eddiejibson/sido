@@ -168,7 +168,7 @@ class Sido
                     $test->addAttribute("failures", $failures);
                 }
             }
-            $path = $_SERVER['DOCUMENT_ROOT'] . "/reports/" . $this->options["report"];
+            $path = dirname(__FILE__) . "/reports/" . $this->options["report"];
             file_put_contents($path, $xml->asXML());
         }
     }
