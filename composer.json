@@ -7,10 +7,13 @@
         "name": "Edward Jibson",
         "email": "jibson@tuta.io"
     }],
+    "require": {
+        "php": "^7.1"
+    },
     "autoload": {
-        "psr-4": {
-            "eddiejibson\\sido\\": "src/"
-        }
+        "classmap": [
+            "src/"
+        ]
     },
     "require": {}
 }
