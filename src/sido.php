@@ -1,5 +1,5 @@
 <?php
-namespace eddiejibson\sido;
+namespace eddiejibson;
 
 class Sido
 {
