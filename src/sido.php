@@ -11,6 +11,7 @@
 namespace eddiejibson;
 
 use \Datetime;
+use \SimpleXMLElement;
 
 class Sido
 {
