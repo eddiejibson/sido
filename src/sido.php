@@ -172,7 +172,7 @@ class Sido
             // if (!file_exists($path)) {
             //     mkdir($path, 0777, true);
             // }
-            file_put_contents("reports/" . $this->options["report"], $xml->asXML());
+            file_put_contents($this->options["report"], $xml->asXML());
         }
     }
     public function __destruct()
