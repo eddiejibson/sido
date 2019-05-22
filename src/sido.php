@@ -168,11 +168,11 @@ class Sido
                     $test->addAttribute("failures", $failures);
                 }
             }
-            $path = dirname(__FILE__) . "/reports/" . $this->options["report"];
-            if (!file_exists($path)) {
-                mkdir($path, 0777, true);
-            }
-            file_put_contents($path, $xml->asXML());
+            // $path = dirname(__FILE__) . "/reports/" . $this->options["report"];
+            // if (!file_exists($path)) {
+            //     mkdir($path, 0777, true);
+            // }
+            file_put_contents("reports/" . $this->options["report"], $xml->asXML());
         }
     }
     public function __destruct()
