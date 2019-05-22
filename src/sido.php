@@ -24,6 +24,11 @@ class Sido
                 ];
             }
         }
+        $this->options["report"] = "report.xml";
+        //I don't want to do tenary for a reason
+        if (isset($options["report"])) {
+            $this->options["report"] = $options["report"];
+        }
         echo "Starting tests...\n";
         $this->startingTime = microtime(true);
         $this->totalTime = 0;
@@ -51,7 +56,7 @@ class Sido
         }
     }
 
-    public function should($statement, string $desc = "evaluate to true")
+    public function should($statement, string $desc = "evaluate to true", bool $shouldBeFalse = false)
     {
         $res = false;
         $arr = [
@@ -63,7 +68,11 @@ class Sido
         } else {
             $this->caseCount[$this->case]["count"]++;
         }
-        if (isset($statement) && (bool)$statement == true) {
+        $bool = (bool)(isset($statement) && (bool)$statement == true);
+        if ($shouldBeFalse) {
+            $bool = !$bool;
+        }
+        if ($bool) {
             $arr["duration"] = (microtime(true) - $this->sinceLast) / 1000;
             $res = true;
             echo str_pad("\033[32m ✓ " . $desc . ". Success. Statement evaluated to be true. \033[0m(" . (string)(microtime(true) - $this->sinceLast) . " ms)\n", 30, " ", STR_PAD_LEFT);
@@ -125,40 +134,42 @@ class Sido
 
     private function generateReport($xml = false)
     {
-        $failedCount = count($this->failed);
-        if ($xml === false) {
-            $time = (string)(number_format($this->totalTime / 1000, 10));
-            $tests = (string)($this->success + $failedCount);
-            $failures = (string)$failedCount;
-            $xml = new SimpleXMLElement("<testsuites time='$time' tests='$tests' failures='$failures' name='Sido Tests'/>");
-        }
-        if (count($this->tests) > 0) {
-            foreach ($this->tests as $testsuite => $val) {
-                $test = $xml->addChild("testsuite");
-                $test->addAttribute("name", $testsuite);
-                $test->addAttribute("tests", count($val));
-                $test->addAttribute("file", realpath(__FILE__));
-                $test->addAttribute("timestamp", $this->caseCount[$testsuite]["timestamp"]);
-                // var_dump($val);
-                $failures = 0;
-                foreach ($val as $testcase => $value) {
 
-                    $case = $test->addChild("testcase");
-                    $case->addAttribute("name", "$testsuite Should " . $value["desc"]);
-                    $case->addAttribute("classname", "Should " . $value["desc"]);
-                    $case->addAttribute("time", number_format($value["duration"], 8));
-                    if ($value["error"] && is_string($value["error"])) {
-                        $failures++;
-                        $failChild = $case->addChild("failure", $value["error"]);
-                        $failChild->addAttribute("message", $value["error"]);
-                        $failChild->addAttribute("type", "AssertionError");
-                    }
-                }
-                $test->addAttribute("failures", $failures);
+        if (isset($this->options["report"]) && $this->options["report"]) {
+            $failedCount = count($this->failed);
+            if ($xml === false) {
+                $time = (string)(number_format($this->totalTime / 1000, 10));
+                $tests = (string)($this->success + $failedCount);
+                $failures = (string)$failedCount;
+                $xml = new SimpleXMLElement("<testsuites time='$time' tests='$tests' failures='$failures' name='Sido Tests'/>");
             }
-        }
+            if (count($this->tests) > 0) {
+                foreach ($this->tests as $testsuite => $val) {
+                    $test = $xml->addChild("testsuite");
+                    $test->addAttribute("name", $testsuite);
+                    $test->addAttribute("tests", count($val));
+                    $test->addAttribute("file", realpath(__FILE__));
+                    $test->addAttribute("timestamp", $this->caseCount[$testsuite]["timestamp"]);
+                    // var_dump($val);
+                    $failures = 0;
+                    foreach ($val as $testcase => $value) {
 
-        $xml->asXML("report.xml");
+                        $case = $test->addChild("testcase");
+                        $case->addAttribute("name", "$testsuite Should " . $value["desc"]);
+                        $case->addAttribute("classname", "Should " . $value["desc"]);
+                        $case->addAttribute("time", number_format($value["duration"], 8));
+                        if ($value["error"] && is_string($value["error"])) {
+                            $failures++;
+                            $failChild = $case->addChild("failure", $value["error"]);
+                            $failChild->addAttribute("message", $value["error"]);
+                            $failChild->addAttribute("type", "AssertionError");
+                        }
+                    }
+                    $test->addAttribute("failures", $failures);
+                }
+            }
+            $xml->asXML($this->options["report"]);
+        }
     }
     public function __destruct()
     {

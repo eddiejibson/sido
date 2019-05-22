@@ -1,0 +1,11 @@
+
+$sido = new Sido(["discord" => ["webhook" => "https://discordapp.com/api/webhooks/580504701435510816/DGPHGxfxBBmAqYw4oBaINcP5Oco3s2atelt5XctMg6KFrFmGG_4bN5F9-CxIjP1a8dhc"]]);
+
+$sido->setCase("test");
+
+$sido->should((1 == 1), "1 equals 1");
+$sido->should((2 == 1), "2 equals 1");
+
+$sido->setCase("Other test case");
+
+$sido->should((5 == 5), "5 equals 5");
