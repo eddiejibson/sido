@@ -10,6 +10,8 @@
 
 namespace eddiejibson;
 
+use \Datetime;
+
 class Sido
 {
     public function __construct(array $options = [])
@@ -43,8 +45,8 @@ class Sido
 
     private function getTimestamp()
     {
-        $dt = new \DateTime();
-        return $dt->format(\DateTime::ATOM);
+        $dt = new DateTime();
+        return $dt->format(DateTime::ATOM);
     }
 
     public function setTest(string $label = "default")
