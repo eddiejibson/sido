@@ -72,11 +72,11 @@ class Sido
         }
         if ($bool) {
             $arr["duration"] = (microtime(true) - $this->sinceLast) / 1000;
-            echo str_pad("\033[32m ✓ " . $desc . ". Success. Statement evaluated to be true. \033[0m(" . (string)(microtime(true) - $this->sinceLast) . " ms)\n", 30, " ", STR_PAD_LEFT);
+            echo str_pad("\033[32m ✓ " . $desc . ". Success. Statement evaluated to be true. \033[0m \n", 30, " ", STR_PAD_LEFT);
             $this->success++;
         } else {
             $arr["duration"] = (microtime(true) - $this->sinceLast) / 1000;
-            echo str_pad("\033[31m ❌ " . $desc . ". Failed. Statement evaluated to be false. \033[0m(" . (string)(microtime(true) - $this->sinceLast) . " ms)\n", 30, " ", STR_PAD_LEFT);
+            echo str_pad("\033[31m ❌ " . $desc . ". Failed. Statement evaluated to be false. \033[0m\n", 30, " ", STR_PAD_LEFT);
             $arr["error"] = "Should " . $desc . " Failed. Statement evaluated to be false";
             array_push($this->failed, ["case" => $this->case]);
         }
