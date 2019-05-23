@@ -8,7 +8,8 @@
         "email": "jibson@tuta.io"
     }],
     "require": {
-        "php": "^7.0"
+        "php": "^7.0",
+        "ext-SimpleXML": "*"
     },
     "version": "1.0.0",
     "keywords": ["unit-test", "testing-framework", "framework", "testing", "phpunit", "unit"],
