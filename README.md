@@ -16,25 +16,25 @@ composer require eddiejibson/sido:dev-master
 
 ## Why sido?
 
-* Simple and light
-* Provides test report generation - suitable for immediate use on platforms such as CircleCI (no need to format it specially yourself)
-* 0 dependencies
-* Few assertions (easy to get used to) which still provides everything you need
-* Provides a [Discord](https://discordapp.com) notification utility via a webhook (notify you and your team easily on completion of a test)
+- Simple and light
+- Provides test report generation - suitable for immediate use on platforms such as CircleCI (no need to format it specially yourself)
+- 0 dependencies
+- Few assertions (easy to get used to) which still provides everything you need
+- Provides a [Discord](https://discordapp.com) notification utility via a webhook (notify you and your team easily on completion of a test)
 
 ## Basic example
 
 ```php
 require "/vendor/autoload.php"; //Require composer's autoload
 
-//Custom options can be set. All are optional.
+//Custom options can be set. All are Optional
 $options = [
-    "report" => "report.xml", //Report file name. Set to false to disable generation fully.
+    "report" => dirname(__FILE__) . "/reports/" . "report.xml", //Report location. Set to false to disable generation fully.
     //On test completion, webhooks can be run. You can set some here.
     "discord" => [ //Discord webhook settings. If not set, will default to false (not used)
         "webhook" => "https://discordapp.com/api/webhooks/id/token", //Your Discord webhook URL. 
         //This can be created by editing the Discord channel and navigating to the 'webhooks' section
-        "name" => "Eddie's test runner" //The name of the bot. This is optional.
+        "name" => "Eddie's test runner" //The name of the bot. This is Optional
     ]
 ];
 
@@ -51,6 +51,12 @@ $array = ["hello" => true];
 //Add testcases to the test
 $sido->should(is_array($array), "Be an array");
 $sido->should(count($array) > 1, "Have a length greater than 0");
+
+//Add another test
+$sido->setTest("Random test");
+
+//Add a testcase to this test
+$sido->should((1 == 1), "1 should equal 1");
 
 //And that's pretty much it...
 ```

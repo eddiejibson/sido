@@ -27,11 +27,7 @@ class Sido
                 ];
             }
         }
-        $this->options["report"] = "report.xml";
-        //I don't want to do tenary for a reason
-        if (isset($options["report"])) {
-            $this->options["report"] = $options["report"];
-        }
+        $this->options["report"] = $this->options["report"] ?? false;
         echo "Starting tests...\n";
         $this->startingTime = microtime(true);
         $this->totalTime = 0;
@@ -50,7 +46,7 @@ class Sido
         return $dt->format(DateTime::ATOM);
     }
 
-    public function setTest(string $label = "default")
+    public function setTest(string $label = "Default tests")
     {
         echo "\n" . $label . " :\n\n";
         $this->case = $label;
