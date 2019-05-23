@@ -1,0 +1,6 @@
+- [Quick Start](quickstart.md)
+- [Configuration](configuration.md)
+- Functions
+- Integration
+    - [CircleCI Example](circleci.md)
+- [GitHub Repository](https://github.com/eddiejibson/sido)
