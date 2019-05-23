@@ -8,8 +8,10 @@
         "email": "jibson@tuta.io"
     }],
     "require": {
-        "php": "^7.1"
+        "php": "^7.0"
     },
+    "version": "1.0.0",
+    "keywords": ["unit-test", "testing-framework", "framework", "testing", "phpunit", "unit"],
     "autoload": {
         "classmap": [
             "src/"
