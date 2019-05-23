@@ -1,6 +1,8 @@
 - [Quick Start](quickstart.md)
 - [Configuration](configuration.md)
 - Functions
+    - [setTest()](settest.md)
+    - [should()](should.md)
 - Integration
     - [CircleCI Example](circleci.md)
 - [GitHub Repository](https://github.com/eddiejibson/sido)

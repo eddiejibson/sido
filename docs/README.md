@@ -6,7 +6,7 @@
 
 If you're finding this library of use, please consider starring it on the [GitHub repository](https://github.com/eddiejibson/sido). It makes our night sky better. ⭐
 
-For more details (and how to get started), visit the [Quick Start](quickstart.md) page.
+For more details (and how to get started, along with examples), visit the [Quick Start](quickstart.md) page.
 
 For further specific documentation, navigating through the content in the Sidebar should help.
 
