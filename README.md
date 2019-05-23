@@ -61,6 +61,8 @@ $sido->should((1 == 1), "1 should equal 1");
 //And that's pretty much it...
 ```
 
+[Example of how to integrate Sido with CircleCI for automated testing](https://github.com/eddiejibson/sido-test)
+
 ## Documentation
 
 [The full documentation can be viewed here](https://sido.jibson.me).
