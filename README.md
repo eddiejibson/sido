@@ -60,3 +60,7 @@ $sido->should((1 == 1), "1 should equal 1");
 
 //And that's pretty much it...
 ```
+
+## Documentation
+
+[The full documentation can be viewed here](https://sido.jibson.me).
