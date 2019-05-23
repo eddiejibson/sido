@@ -14,3 +14,5 @@ $sido->setTest("Normal Test");
 ## Parameters
 
 There is only one parameter for this function and it must be passed into the function as a string. It is not required and if not set will default to `"Default tests"`.
+
+**Next Steps:** [should()](should.md)

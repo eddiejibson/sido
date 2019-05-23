@@ -54,3 +54,5 @@ $sido->should((1 == 1), "1 should equal 1");
 
 //And that's pretty much it...
 ```
+
+**Next Steps:** [Configuration](configuration.md)

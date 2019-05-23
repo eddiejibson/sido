@@ -28,3 +28,5 @@ $sido = new \eddiejibson\Sido($options);
 - discord: **Optional** *Array* The Discord webhook information.
     - webhook: *String* The Discord webhook URL.
     - name: *String* The name you want the Discord message to be sent from.
+
+**Next Steps:** [setTest()](settest.md)
