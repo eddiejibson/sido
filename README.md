@@ -2,7 +2,7 @@
 
 *sido (시도)* meaning : Try/attempt
 
-A very simple PHP unit testing library I created as I'm not a fan of PHPUnit and it's many dependencies.
+A very simple PHP unit testing library I created as I'm not a fan of PHPUnit and it's many dependencies and ridiculous complexity.
 
 If you're finding this library of use, please consider starring it on the [GitHub repository](https://github.com/eddiejibson/sido). It makes our night sky better. ⭐
 
@@ -17,7 +17,7 @@ composer require eddiejibson/sido "^1.0"
 ## Why sido?
 
 - Simple and light
-- Provides test report generation - suitable for immediate use on platforms such as CircleCI (no need to format it specially yourself)
+- Provides test report generation in the junit-like style - suitable for immediate use on platforms such as CircleCI (no need to format it specially yourself)
 - 0 dependencies
 - Few assertions (easy to get used to) which still provides everything you need
 - Provides a [Discord](https://discordapp.com) notification utility via a webhook (notify you and your team easily on completion of a test)
@@ -50,7 +50,7 @@ $array = ["hello" => true];
 
 //Add testcases to the test
 $sido->should(is_array($array), "Be an array");
-$sido->should(count($array) > 1, "Have a length greater than 0");
+$sido->should(count($array) > 0, "Have a length greater than 0");
 
 //Add another test
 $sido->setTest("Random test");
@@ -60,3 +60,7 @@ $sido->should((1 == 1), "1 should equal 1");
 
 //And that's pretty much it...
 ```
+
+## Documentation
+
+[The full documentation can be viewed here](https://sido.jibson.me).
