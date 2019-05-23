@@ -17,7 +17,7 @@ composer require eddiejibson/sido "^1.0"
 ## Why sido?
 
 - Simple and light
-- Provides test report generation - suitable for immediate use on platforms such as CircleCI (no need to format it specially yourself)
+- Provides test report generation in the junit-like style - suitable for immediate use on platforms such as CircleCI (no need to format it specially yourself)
 - 0 dependencies
 - Few assertions (easy to get used to) which still provides everything you need
 - Provides a [Discord](https://discordapp.com) notification utility via a webhook (notify you and your team easily on completion of a test)
