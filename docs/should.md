@@ -8,10 +8,10 @@ This is effectively a test case that should go under a [setTest()](settest.md) f
 $sido->setTest($statement, string $desc = "evaluate to true", bool $shouldBeFalse = false);
 
 //Make a test case
-$sido->setTest((1 == 1), "1 equals 1");
+$sido->should((1 == 1), "1 equals 1");
 
 //Make a test case that you want to not evaluate to true
-$sido->setTest((1 != 2), "1 does not equal 2", true);
+$sido->should((1 != 2), "1 does not equal 2", true);
 ```
 
 ## Parameters
