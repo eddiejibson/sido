@@ -6,7 +6,7 @@ A very simple PHP unit testing library I created as I'm not a fan of PHPUnit and
 
 If you're finding this library of use, please consider starring it on the [GitHub repository](https://github.com/eddiejibson/sido). It makes our night sky better. ⭐
 
-[Read the documentation here](https//sido.jibson.me)
+[Read the documentation here](https://sido.jibson.me)
 
 ## Installation
 
