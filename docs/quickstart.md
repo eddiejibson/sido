@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-composer require eddiejibson/sido "^1.0"
+composer require eddiejibson/sido:dev-master
 ```
 
 ## Initialize
