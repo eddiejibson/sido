@@ -11,7 +11,7 @@ If you're finding this library of use, please consider starring it on the [GitHu
 ## Installation
 
 ```bash
-composer require eddiejibson/sido:dev-master
+composer require --dev eddiejibson/sido:dev-master
 ```
 
 ## Why sido?
